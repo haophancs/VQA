@@ -8,6 +8,7 @@ import torch.nn.utils.rnn as rnn
 from tensorboardX import SummaryWriter
 from datetime import datetime
 from torchvision import models
+from googletrans import Translator
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
@@ -27,6 +28,15 @@ def wu_palmer_similarity(phrase1, phrase2):
                 sim = synset1.wup_similarity(synset2)
                 all_sim.append(sim)
         return np.mean(all_sim)
+
+def create_trans_dict(words, translator):
+    return dict(zip(
+        words,
+        list(map(
+            lambda s: str.strip(s.lower()),
+            translator.translate('\n'.join(words)).text.split('\n')
+        ))
+    ))
 
 
 class ExperimentRunnerBase(object):
@@ -151,7 +161,11 @@ class ExperimentRunnerBase(object):
 
         with open('./outputs/coatt/i2a.pkl', 'rb') as f:
             i2a = pickle.load(f)
-        wups = [wu_palmer_similarity(i2a[ga], i2a[pa]) for ga, pa in list(zip(all_ga, all_pa))]
+        trans_dict = create_trans_dict(list(i2a.values()), Translator())
+        wups = [wu_palmer_similarity(
+            trans_dict[i2a[ga]] if ga in i2a and i2a[ga] in trans_dict else '',
+            trans_dict[i2a[pa]] if pa in i2a and i2a[pa] in trans_dict else '',
+        ) for ga, pa in list(zip(all_ga, all_pa))]
         print("Test wups 0.0:", np.mean([it > 0.0 for it in wups]))
         print("Test wups 0.9:", np.mean([it > 0.9 for it in wups]))
 

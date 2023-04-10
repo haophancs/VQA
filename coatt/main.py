@@ -1,4 +1,7 @@
 import argparse
+
+import nltk
+
 from coatt.coattention_experiment_runner import CoattentionNetExperimentRunner
 
 
@@ -31,6 +34,10 @@ if __name__ == "__main__":
     parser.add_argument('--num_epochs', type=int, default=30)
     parser.add_argument('--num_data_loader_workers', type=int, default=0)
     args = parser.parse_args()
+
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    nltk.download('punkt')
 
     if args.model == "simple":
         experiment_runner_class = SimpleBaselineExperimentRunner
