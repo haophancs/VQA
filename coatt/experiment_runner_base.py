@@ -164,11 +164,10 @@ class ExperimentRunnerBase(object):
 
         with open('./outputs/coatt/i2a.pkl', 'rb') as f:
             i2a = pickle.load(f)
-        trans_dict = create_trans_dict(list(i2a.values()), Translator())
-        wups = [wu_palmer_similarity(
-            trans_dict[i2a[ga]] if ga in i2a and i2a[ga] in trans_dict else '',
-            trans_dict[i2a[pa]] if pa in i2a and i2a[pa] in trans_dict else '',
-        ) for ga, pa in list(zip(all_ga, all_pa))]
+        all_ga = list(map(lambda a: i2a[a], all_ga))
+        all_pa = list(map(lambda a: i2a[a], all_pa))
+        trans_dict = create_trans_dict(np.union1d(all_ga, all_pa), Translator())
+        wups = [wu_palmer_similarity(trans_dict[ga], trans_dict[pa]) for ga, pa in list(zip(all_ga, all_pa))]
         print("Test wups 0.0:", np.mean([it > 0.0 for it in wups]))
         print("Test wups 0.9:", np.mean([it > 0.9 for it in wups]))
 
