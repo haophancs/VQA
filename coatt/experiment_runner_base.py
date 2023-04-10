@@ -2,6 +2,7 @@ import os
 import shutil
 import pickle
 import nltk
+from nltk.corpus import wordnet as wn
 import torch
 import torch.nn as nn
 import torch.optim as optim
