@@ -18,17 +18,17 @@ cd /content/VQA
 
 # Download pretrained word vectors
 cd ./pretrained
-wget https://public.vinai.io/word2vec_vi_words_100dims.zip
-unzip -q word2vec_vi_words_100dims.zip
-rm word2vec_vi_words_100dims.zip
+# wget https://public.vinai.io/word2vec_vi_words_100dims.zip
+# unzip -q word2vec_vi_words_100dims.zip
+# rm word2vec_vi_words_100dims.zip
 
 wget https://public.vinai.io/word2vec_vi_words_300dims.zip
 unzip -q word2vec_vi_words_300dims.zip
 rm word2vec_vi_words_300dims.zip
 
-wget https://public.vinai.io/word2vec_vi_syllables_100dims.zip
-unzip -q word2vec_vi_syllables_100dims.zip
-rm word2vec_vi_syllables_100dims.zip
+# wget https://public.vinai.io/word2vec_vi_syllables_100dims.zip
+# unzip -q word2vec_vi_syllables_100dims.zip
+# rm word2vec_vi_syllables_100dims.zip
 
 wget https://public.vinai.io/word2vec_vi_syllables_300dims.zip
 unzip -q word2vec_vi_syllables_300dims.zip
