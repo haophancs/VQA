@@ -217,7 +217,7 @@ class ExperimentRunnerBase(object):
             #                    # TODO: you probably want to plot something here
             #                    self.writer.add_scalar('valid/accuracy', val_accuracy, val_iter)
             #                    val_iter = val_iter + 1
-            continue
+
             if (epoch + 1) % self._save_freq == 0 or epoch == self._num_epochs - 1:
                 val_accuracy = self.validate()
                 print("Epoch: {} has val accuracy {}".format(epoch, val_accuracy))
