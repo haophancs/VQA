@@ -1,6 +1,7 @@
 import os
 import shutil
 import pickle
+import nltk
 import torch
 import torch.nn as nn
 import torch.optim as optim
