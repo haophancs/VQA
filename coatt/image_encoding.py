@@ -36,7 +36,7 @@ class VqaImgDataset(Dataset):
             img_id = fname.split('.')[0]
             img_ids[int(img_id)] = idx
 
-        with open('/content/VQA/outputs/coatt/' + name + '_enc_idx.npy', 'wb') as f:
+        with open('./outputs/coatt/' + name + '_enc_idx.npy', 'wb') as f:
             pickle.dump(img_ids, f)
 
     def __len__(self):
@@ -48,12 +48,12 @@ class VqaImgDataset(Dataset):
 
         return imgT.float()
 
-tr_image_dir = '/content/VQA/datasets/vivqa/train'
-va_image_dir = '/content/VQA/datasets/vivqa/val'
-ts_image_dir = '/content/VQA/datasets/vivqa/test'
-tr_out_dir = '/content/VQA/outputs/coatt/tr_enc'
-va_out_dir = '/content/VQA/outputs/coatt/va_enc'
-ts_out_dir = '/content/VQA/outputs/coatt/ts_enc'
+tr_image_dir = './datasets/vivqa/train'
+va_image_dir = './datasets/vivqa/val'
+ts_image_dir = './datasets/vivqa/test'
+tr_out_dir = './outputs/coatt/tr_enc'
+va_out_dir = './outputs/coatt/va_enc'
+ts_out_dir = './outputs/coatt/ts_enc'
 DEVICE = "cuda"
 
 model = models.resnet18(pretrained=True)

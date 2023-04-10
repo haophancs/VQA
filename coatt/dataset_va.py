@@ -6,12 +6,12 @@ from six.moves import cPickle as pickle
 from collections import defaultdict
 from external.vqa.vqa import VQA
 
-image_dir = "/content/VQA/datasets/vivqa/val"
+image_dir = "./datasets/vivqa/val"
 img_prefix = ""
-qjson = "/content/VQA/datasets/vivqa/vqa/vivqa_val_questions.json"
-ajson = "/content/VQA/datasets/vivqa/vqa/vivqa_val_annotations.json"
+qjson = "./datasets/vivqa/vqa/vivqa_val_questions.json"
+ajson = "./datasets/vivqa/vqa/vivqa_val_annotations.json"
 
-with open('/content/VQA/outputs/coatt/a2i.pkl', 'rb') as f:
+with open('./outputs/coatt/a2i.pkl', 'rb') as f:
     a2i = pickle.load(f)
 
 vqa = VQA(ajson, qjson)
@@ -41,6 +41,6 @@ for ques_id in ques_ids:
     if not answer == "":
         ques_ids_modif.append(ques_id)
 
-np.save('/content/VQA/outputs/coatt/va_img_names.npy', img_names)
-np.save('/content/VQA/outputs/coatt/va_img_ids.npy', img_ids)
-np.save('/content/VQA/outputs/coatt/va_ques_ids.npy', ques_ids_modif)
+np.save('./outputs/coatt/va_img_names.npy', img_names)
+np.save('./outputs/coatt/va_img_ids.npy', img_ids)
+np.save('./outputs/coatt/va_ques_ids.npy', ques_ids_modif)

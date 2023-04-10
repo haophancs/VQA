@@ -19,7 +19,7 @@ class CoattentionNet(nn.Module):
         self.embed = PretrainedTextEmbedding.from_pretrained(
             embed_dim=embed_dim,
             pretrained_name=pretrained_embed,
-            pretrained_root='/content/VQA/pretrained',
+            pretrained_root='./pretrained',
             device='cuda'
         )
 

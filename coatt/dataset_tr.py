@@ -6,10 +6,10 @@ from six.moves import cPickle as pickle
 from collections import defaultdict
 from external.vqa.vqa import VQA
 
-image_dir = "/content/VQA/datasets/vivqa/train"
+image_dir = "./datasets/vivqa/train"
 img_prefix = ""
-qjson = "/content/VQA/datasets/vivqa/vqa/vivqa_train_questions.json"
-ajson = "/content/VQA/datasets/vivqa/vqa/vivqa_train_annotations.json"
+qjson = "./datasets/vivqa/vqa/vivqa_train_questions.json"
+ajson = "./datasets/vivqa/vqa/vivqa_train_annotations.json"
 
 vqa = VQA(ajson, qjson)
 
@@ -74,20 +74,20 @@ for ques_id in ques_ids:
     ques_ids_modif.append(ques_id)
 
 print(len(ques_ids_modif), len(ques_ids))
-with open('/content/VQA/outputs/coatt/q2i.pkl', 'wb') as f:
+with open('./outputs/coatt/q2i.pkl', 'wb') as f:
     pickle.dump(dict(q2i), f)
-with open('/content/VQA/outputs/coatt/a2i.pkl', 'wb') as f:
+with open('./outputs/coatt/a2i.pkl', 'wb') as f:
     pickle.dump(dict(a2i), f)
-with open('/content/VQA/outputs/coatt/i2a.pkl', 'wb') as f:
+with open('./outputs/coatt/i2a.pkl', 'wb') as f:
     pickle.dump(i2a, f)
-with open('/content/VQA/outputs/coatt/a2i_count.pkl', 'wb') as f:
+with open('./outputs/coatt/a2i_count.pkl', 'wb') as f:
     pickle.dump(a2i_count, f)
 
-np.save('/content/VQA/outputs/coatt/q2i.npy', dict(q2i))
-np.save('/content/VQA/outputs/coatt/a2i.npy', dict(a2i))
-np.save('/content/VQA/outputs/coatt/i2a.npy', i2a)
-np.save('/content/VQA/outputs/coatt/a2i_count.npy', a2i_count)
+np.save('./outputs/coatt/q2i.npy', dict(q2i))
+np.save('./outputs/coatt/a2i.npy', dict(a2i))
+np.save('./outputs/coatt/i2a.npy', i2a)
+np.save('./outputs/coatt/a2i_count.npy', a2i_count)
 
-np.save('/content/VQA/outputs/coatt/tr_img_names.npy', img_names)
-np.save('/content/VQA/outputs/coatt/tr_img_ids.npy', img_ids)
-np.save('/content/VQA/outputs/coatt/tr_ques_ids.npy', ques_ids_modif)
+np.save('./outputs/coatt/tr_img_names.npy', img_names)
+np.save('./outputs/coatt/tr_img_ids.npy', img_ids)
+np.save('./outputs/coatt/tr_ques_ids.npy', ques_ids_modif)

@@ -8,23 +8,23 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str, choices=['simple', 'coattention'], default='simple')
     parser.add_argument('--pretrained_embed', type=str, default='word2vec_vi_words_100dims')
 
-    parser.add_argument('--train_image_dir', type=str, default='/content/VQA/datasets/vivqa/train')
+    parser.add_argument('--train_image_dir', type=str, default='./datasets/vivqa/train')
     parser.add_argument('--train_question_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_train_questions.json')
+                        default='./datasets/vivqa/vqa/vivqa_train_questions.json')
     parser.add_argument('--train_annotation_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_train_annotations.json')
+                        default='./datasets/vivqa/vqa/vivqa_train_annotations.json')
 
-    parser.add_argument('--val_image_dir', type=str, default='/content/VQA/datasets/vivqa/val')
+    parser.add_argument('--val_image_dir', type=str, default='./datasets/vivqa/val')
     parser.add_argument('--val_question_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_val_questions.json')
+                        default='./datasets/vivqa/vqa/vivqa_val_questions.json')
     parser.add_argument('--val_annotation_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_val_annotations.json')
+                        default='./datasets/vivqa/vqa/vivqa_val_annotations.json')
 
-    parser.add_argument('--test_image_dir', type=str, default='/content/VQA/datasets/vivqa/test')
+    parser.add_argument('--test_image_dir', type=str, default='./datasets/vivqa/test')
     parser.add_argument('--test_question_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_test_questions.json')
+                        default='./datasets/vivqa/vqa/vivqa_test_questions.json')
     parser.add_argument('--test_annotation_path', type=str,
-                        default='/content/VQA/datasets/vivqa/vqa/vivqa_test_annotations.json')
+                        default='./datasets/vivqa/vqa/vivqa_test_annotations.json')
 
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--lr', type=float, default=3e-5)

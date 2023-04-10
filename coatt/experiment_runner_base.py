@@ -69,9 +69,9 @@ class ExperimentRunnerBase(object):
         self.writer = SummaryWriter()
 
         if self.method == 'simple':
-            self.chk_dir = '/content/VQA/outputs/coatt/chk_simple/'
+            self.chk_dir = './outputs/coatt/chk_simple/'
         else:
-            self.chk_dir = '/content/VQA/outputs/coatt/chk_coattention/'
+            self.chk_dir = './outputs/coatt/chk_coattention/'
             print('Creating Image Encoder')
             self.img_enc = models.resnet18(pretrained=True)
             modules = list(self.img_enc.children())[:-2]
@@ -149,7 +149,7 @@ class ExperimentRunnerBase(object):
         print("Test macro f1:", f1_score(all_ga, all_pa, average='macro', zero_division=0))
         print("Test weighted f1:", f1_score(all_ga, all_pa, average='weighted', zero_division=0))
 
-        with open('/content/VQA/outputs/coatt/i2a.pkl', 'rb') as f:
+        with open('./outputs/coatt/i2a.pkl', 'rb') as f:
             i2a = pickle.load(f)
         wups = [wu_palmer_similarity(i2a[ga], i2a[pa]) for ga, pa in list(zip(all_ga, all_pa))]
         print("Test wups 0.0:", np.mean([it > 0.0 for it in wups]))
@@ -220,7 +220,7 @@ class ExperimentRunnerBase(object):
                                      is_best, self.chk_dir + 'checkpoint_' + str(epoch + 1) + '.pth.tar')
 
         # Closing tensorboard logger
-        logdir = os.path.join('/content/VQA/outputs/coatt/log/tb_', datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
+        logdir = os.path.join('./outputs/coatt/log/tb_', datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
         if not os.path.exists(logdir):
             os.makedirs(logdir)
         self.writer.export_scalars_to_json(logdir + 'tb_summary.json')

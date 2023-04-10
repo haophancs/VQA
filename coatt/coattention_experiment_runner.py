@@ -29,26 +29,26 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                  num_data_loader_workers, pretrained_embed='word2vec_vi_words_100dims'):
         self.method = 'coattention'
         print('Loading numpy files. \n')
-        with open('/content/VQA/outputs/coatt/q2i.pkl', 'rb') as f:
+        with open('./outputs/coatt/q2i.pkl', 'rb') as f:
             q2i = pickle.load(f)
-        with open('/content/VQA/outputs/coatt/a2i.pkl', 'rb') as f:
+        with open('./outputs/coatt/a2i.pkl', 'rb') as f:
             a2i = pickle.load(f)
-        with open('/content/VQA/outputs/coatt/i2a.pkl', 'rb') as f:
+        with open('./outputs/coatt/i2a.pkl', 'rb') as f:
             i2a = pickle.load(f)
-        with open('/content/VQA/outputs/coatt/a2i_count.pkl', 'rb') as f:
+        with open('./outputs/coatt/a2i_count.pkl', 'rb') as f:
             a2i_count = pickle.load(f)
 
-        tr_img_names = np.load('/content/VQA/outputs/coatt/tr_img_names.npy', encoding='latin1').tolist()
-        tr_img_ids = np.load('/content/VQA/outputs/coatt/tr_img_ids.npy', encoding='latin1').tolist()
-        tr_ques_ids = np.load('/content/VQA/outputs/coatt/tr_ques_ids.npy', encoding='latin1').tolist()
+        tr_img_names = np.load('./outputs/coatt/tr_img_names.npy', encoding='latin1').tolist()
+        tr_img_ids = np.load('./outputs/coatt/tr_img_ids.npy', encoding='latin1').tolist()
+        tr_ques_ids = np.load('./outputs/coatt/tr_ques_ids.npy', encoding='latin1').tolist()
 
-        va_img_names = np.load('/content/VQA/outputs/coatt/va_img_names.npy', encoding='latin1').tolist()
-        va_img_ids = np.load('/content/VQA/outputs/coatt/va_img_ids.npy', encoding='latin1').tolist()
-        va_ques_ids = np.load('/content/VQA/outputs/coatt/va_ques_ids.npy', encoding='latin1').tolist()
+        va_img_names = np.load('./outputs/coatt/va_img_names.npy', encoding='latin1').tolist()
+        va_img_ids = np.load('./outputs/coatt/va_img_ids.npy', encoding='latin1').tolist()
+        va_ques_ids = np.load('./outputs/coatt/va_ques_ids.npy', encoding='latin1').tolist()
 
-        ts_img_names = np.load('/content/VQA/outputs/coatt/ts_img_names.npy', encoding='latin1').tolist()
-        ts_img_ids = np.load('/content/VQA/outputs/coatt/ts_img_ids.npy', encoding='latin1').tolist()
-        ts_ques_ids = np.load('/content/VQA/outputs/coatt/ts_ques_ids.npy', encoding='latin1').tolist()
+        ts_img_names = np.load('./outputs/coatt/ts_img_names.npy', encoding='latin1').tolist()
+        ts_img_ids = np.load('./outputs/coatt/ts_img_ids.npy', encoding='latin1').tolist()
+        ts_ques_ids = np.load('./outputs/coatt/ts_ques_ids.npy', encoding='latin1').tolist()
 
         print('Creating Datasets.')
         train_dataset = VqaDataset(image_dir=train_image_dir, collate=True,
@@ -58,7 +58,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                                    q2i=q2i, a2i=a2i, i2a=i2a, a2i_count=a2i_count,
                                    img_names=tr_img_names, img_ids=tr_img_ids,
                                    ques_ids=tr_ques_ids, method=self.method,
-                                   dataset_type="train", enc_dir='/content/VQA/outputs/coatt/tr_enc')
+                                   dataset_type="train", enc_dir='./outputs/coatt/tr_enc')
 
         val_dataset = VqaDataset(image_dir=val_image_dir, collate=True,
                                  question_json_file_path=val_question_path,
@@ -67,7 +67,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                                  q2i=q2i, a2i=a2i, i2a=i2a, a2i_count=a2i_count,
                                  img_names=va_img_names, img_ids=va_img_ids,
                                  ques_ids=va_ques_ids, method=self.method,
-                                 dataset_type="validation", enc_dir='/content/VQA/outputs/coatt/va_enc')
+                                 dataset_type="validation", enc_dir='./outputs/coatt/va_enc')
 
         test_dataset = VqaDataset(image_dir=test_image_dir, collate=True,
                                   question_json_file_path=test_question_path,
@@ -76,7 +76,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                                   q2i=q2i, a2i=a2i, i2a=i2a, a2i_count=a2i_count,
                                   img_names=ts_img_names, img_ids=ts_img_ids,
                                   ques_ids=ts_ques_ids, method=self.method,
-                                  dataset_type="test", enc_dir='/content/VQA/outputs/coatt/ts_enc')
+                                  dataset_type="test", enc_dir='./outputs/coatt/ts_enc')
 
         self._train_dataset_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0,
                                                 collate_fn=collate_lines)

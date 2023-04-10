@@ -54,15 +54,15 @@ def pre_process_dataset(image_dir, qjson, ajson, img_prefix):
     return q2i, a2i, i2a, a2i_count
 
 if __name__ == '__main__':
-    image_dir = "/content/VQA/datasets/vivqa/train"
+    image_dir = "./datasets/vivqa/train"
     img_prefix = ""
-    qjson = "/content/VQA/datasets/vivqa/vqa/vivqa_train_questions.json"
-    ajson = "/content/VQA/datasets/vivqa/vqa/vivqa_train_annotations.json"
+    qjson = "./datasets/vivqa/vqa/vivqa_train_questions.json"
+    ajson = "./datasets/vivqa/vqa/vivqa_train_annotations.json"
 
     q2i, a2i, i2a, a2i_count = pre_process_dataset(image_dir, qjson, ajson, img_prefix)
-    np.save('/content/VQA/outputs/coatt/q2i.npy', q2i)
-    np.save('/content/VQA/outputs/coatt/a2i.npy', a2i)
-    np.save('/content/VQA/outputs/coatt/i2a.npy', i2a)
-    np.save('/content/VQA/outputs/coatt/a2i_count.npy', a2i_count)
+    np.save('./outputs/coatt/q2i.npy', q2i)
+    np.save('./outputs/coatt/a2i.npy', a2i)
+    np.save('./outputs/coatt/i2a.npy', i2a)
+    np.save('./outputs/coatt/a2i_count.npy', a2i_count)
 
 

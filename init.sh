@@ -1,23 +1,23 @@
 pip install -r requirements.txt
 
-mkdir -p /content/VQA/datasets
-mkdir -p /content/VQA/pretrained
-mkdir -p /content/VQA/outputs
+mkdir -p ./datasets
+mkdir -p ./pretrained
+mkdir -p ./outputs
 
-mkdir -p /content/VQA/outputs/coatt/tr_enc
-mkdir -p /content/VQA/outputs/coatt/va_enc
-mkdir -p /content/VQA/outputs/coatt/ts_enc
-mkdir -p /content/VQA/outputs/coatt/chk_coattention
-mkdir -p /content/VQA/outputs/coatt/log
+mkdir -p ./outputs/coatt/tr_enc
+mkdir -p ./outputs/coatt/va_enc
+mkdir -p ./outputs/coatt/ts_enc
+mkdir -p ./outputs/coatt/chk_coattention
+mkdir -p ./outputs/coatt/log
 
 # Download ViVQA datasets
-cd /content/VQA/datasets
+cd ./datasets
 gdown --id 1Yc36OjdwpXt14eOJ6HjK78prV-eT8Y83
 unzip -q vivqa.zip && rm vivqa.zip
 cd /content/VQA
 
 # Download pretrained word vectors
-cd /content/VQA/pretrained
+cd ./pretrained
 wget https://public.vinai.io/word2vec_vi_words_100dims.zip
 unzip -q word2vec_vi_words_100dims.zip
 rm word2vec_vi_words_100dims.zip

@@ -86,13 +86,13 @@ class VqaDataset(Dataset):
         self.enc_dir = enc_dir
 
         if collate and dataset_type == 'train':
-            with open('/content/VQA/outputs/coatt/train_enc_idx.npy', 'rb') as f:
+            with open('./outputs/coatt/train_enc_idx.npy', 'rb') as f:
                 self.enc_idx = pickle.load(f)
         elif collate and dataset_type == 'val':
-            with open('/content/VQA/outputs/coatt/val_enc_idx.npy', 'rb') as f:
+            with open('./outputs/coatt/val_enc_idx.npy', 'rb') as f:
                 self.enc_idx = pickle.load(f)
         elif collate and dataset_type == 'test':
-            with open('/content/VQA/outputs/coatt/test_enc_idx.npy', 'rb') as f:
+            with open('./outputs/coatt/test_enc_idx.npy', 'rb') as f:
                 self.enc_idx = pickle.load(f)
     def __len__(self):
         return len(self.ques_ids)
