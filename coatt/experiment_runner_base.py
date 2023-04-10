@@ -121,12 +121,11 @@ class ExperimentRunnerBase(object):
             gT = torch.squeeze(gT)
             pd_ans = self._model(imgT, quesT)  # TODO
 
-            if (batch_id + 1) % self._print_freq == 0:
-                batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
-                batch_ga = gT.detach().cpu().numpy().tolist()
-                all_pa += batch_pa
-                all_ga += batch_ga
-                print('Val batch accuracy:', accuracy_score(batch_ga, batch_pa))
+            batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
+            batch_ga = gT.detach().cpu().numpy().tolist()
+            all_pa += batch_pa
+            all_ga += batch_ga
+            print('Val batch accuracy:', accuracy_score(batch_ga, batch_pa))
 
         return accuracy_score(all_ga, all_pa)
 
@@ -134,6 +133,7 @@ class ExperimentRunnerBase(object):
         # TODO. Should return your validation accuracy
         all_pa = []
         all_ga = []
+        all_qid = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
             self._model.eval()  # Set the model to train mode
 
@@ -147,12 +147,12 @@ class ExperimentRunnerBase(object):
             gT = torch.squeeze(gT)
             pd_ans = self._model(imgT, quesT)  # TODO
 
-            if (batch_id + 1) % self._print_freq == 0:
-                batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
-                batch_ga = gT.detach().cpu().numpy().tolist()
-                all_pa += batch_pa
-                all_ga += batch_ga
-                print('Test batch accuracy:', accuracy_score(batch_ga, batch_pa))
+            batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
+            batch_ga = gT.detach().cpu().numpy().tolist()
+            all_pa += batch_pa
+            all_ga += batch_ga
+            all_qid += quesT.detach().cpu().numpy().tolist()
+            print('Test batch accuracy:', accuracy_score(batch_ga, batch_pa))
 
         print("Test accuracy:", accuracy_score(all_ga, all_pa))
         print("Test macro precision:", precision_score(all_ga, all_pa, average='macro', zero_division=0))
@@ -166,6 +166,15 @@ class ExperimentRunnerBase(object):
             i2a = pickle.load(f)
         all_ga = list(map(lambda a: i2a[a], all_ga))
         all_pa = list(map(lambda a: i2a[a], all_pa))
+
+        with open('./outputs/submit_vqa_test.json', 'w') as f:
+            json.dump(
+                list(pd.DataFrame.from_dict({
+                    'question_id': all_qid,
+                    'answer': all_pa
+                }).T.to_dict().values()), f
+            )
+
         trans_dict = create_trans_dict(np.union1d(all_ga, all_pa), Translator())
         wups = [wu_palmer_similarity(trans_dict[ga], trans_dict[pa]) for ga, pa in list(zip(all_ga, all_pa))]
         print("Test wups 0.0:", np.mean([it > 0.0 for it in wups]))
