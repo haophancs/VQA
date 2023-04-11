@@ -168,13 +168,10 @@ class ExperimentRunnerBase(object):
         all_ga = list(map(lambda a: i2a[a], all_ga))
         all_pa = list(map(lambda a: i2a[a], all_pa))
 
-        with open('./outputs/submit_vqa_test.json', 'w') as f:
-            json.dump(
-                list(pd.DataFrame.from_dict({
-                    'question_id': all_qid,
-                    'answer': all_pa
-                }).T.to_dict().values()), f
-            )
+        pd.DataFrame.from_dict({
+            'question_id': all_qid,
+            'answer': all_pa
+        }).to_csv('./outputs/submit_vqa_test.csv', index=False)
 
         trans_dict = create_trans_dict(np.union1d(all_ga, all_pa), Translator())
         wups = [wu_palmer_similarity(trans_dict[ga], trans_dict[pa]) for ga, pa in list(zip(all_ga, all_pa))]
