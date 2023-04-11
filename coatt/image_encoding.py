@@ -76,10 +76,12 @@ ts_img_dataset_loader = DataLoader(ts_img_dataset, batch_size=16, shuffle=False,
 
 print('Dumping Training images encodings.')
 for idx, imgT in enumerate(tr_img_dataset_loader):
+    print(imgT.shape)
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
     out = out.cpu().numpy()
+    print(out.shape)
 
     path = tr_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
