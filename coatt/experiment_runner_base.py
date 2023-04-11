@@ -243,8 +243,7 @@ class ExperimentRunnerBase(object):
                                       'best_prec': best_prec},
                                      # 'optimizer': optimizer.state_dict()}, is_best,
                                      is_best, self.chk_dir + 'checkpoint_' + str(epoch + 1) + '.pth.tar')
-            if (epoch + 1) % 5 == 0:
-                self.test()
+            self.test()
 
         # Closing tensorboard logger
         logdir = os.path.join('./outputs/coatt/log/tb_', datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
