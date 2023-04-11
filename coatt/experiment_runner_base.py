@@ -32,7 +32,7 @@ def wu_palmer_similarity(phrase1, phrase2):
             for synset2 in synsets2:
                 sim = synset1.wup_similarity(synset2)
                 all_sim.append(sim)
-        return np.mean(all_sim)
+        return max(all_sim)
 
 def create_trans_dict(words, translator):
     return dict(zip(
