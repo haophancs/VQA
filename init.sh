@@ -12,7 +12,7 @@ mkdir -p ./outputs/coatt/log
 
 # Download ViVQA datasets
 cd ./datasets
-gdown --id 1Yc36OjdwpXt14eOJ6HjK78prV-eT8Y83
+gdown 1Yc36OjdwpXt14eOJ6HjK78prV-eT8Y83
 unzip -q vivqa.zip && rm vivqa.zip
 cd /content/VQA
 
