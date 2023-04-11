@@ -3,6 +3,7 @@ torchvision==0.14.1+cu117
 torchtext==0.14.1
 -f https://download.pytorch.org/whl/torch_stable.html
 timm==0.4.12
+protobuf==3.20.*
 Pillow
 pandas
 blobfile
