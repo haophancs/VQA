@@ -1,5 +1,6 @@
 import os
 import shutil
+import json
 import pickle
 import nltk
 from nltk.corpus import wordnet as wn
