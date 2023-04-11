@@ -47,7 +47,9 @@ class CoattentionNet(nn.Module):
         self.fc = nn.Linear(embed_dim, num_classes)
 
     def forward(self, image, question):                    # Image: B x 512 x 196
+        print(image.shape, question.shape)
         question, lens = rnn.pad_packed_sequence(question)
+        print(question.shape, lens)
         question = question.permute(1, 0)                  # Ques : B x L
         words = self.embed(question).permute(0, 2, 1)      # Words: B x L x 512
 
