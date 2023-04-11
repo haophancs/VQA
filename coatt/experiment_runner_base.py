@@ -136,7 +136,8 @@ class ExperimentRunnerBase(object):
         all_ga = []
         all_qid = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
-            all_qid += quesT
+            batch_qid = quesT.detach().cpu().tolist()
+            all_qid += batch_qid
 
             self._model.eval()  # Set the model to train mode
             if not self.method == 'simple':
