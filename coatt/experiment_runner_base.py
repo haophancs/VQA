@@ -125,7 +125,6 @@ class ExperimentRunnerBase(object):
             batch_ga = gT.detach().cpu().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
-            print('Val batch accuracy:', accuracy_score(batch_ga, batch_pa))
 
         return accuracy_score(all_ga, all_pa)
 
@@ -135,8 +134,9 @@ class ExperimentRunnerBase(object):
         all_ga = []
         all_qid = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
-            self._model.eval()  # Set the model to train mode
+            all_qid += quesT.detach().cpu().numpy().tolist()
 
+            self._model.eval()  # Set the model to train mode
             if not self.method == 'simple':
                 quesT = rnn.pack_sequence(quesT)
                 imgT = imgT.to(self.DEVICE)
@@ -151,8 +151,6 @@ class ExperimentRunnerBase(object):
             batch_ga = gT.detach().cpu().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
-            all_qid += quesT.detach().cpu().numpy().tolist()
-            print('Test batch accuracy:', accuracy_score(batch_ga, batch_pa))
 
         print("Test accuracy:", accuracy_score(all_ga, all_pa))
         print("Test macro precision:", precision_score(all_ga, all_pa, average='macro', zero_division=0))
