@@ -9,6 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.utils.rnn as rnn
 import numpy as np
+import pandas as pd
 from tensorboardX import SummaryWriter
 from datetime import datetime
 from torchvision import models
