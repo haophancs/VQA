@@ -56,7 +56,7 @@ va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
 DEVICE = "cuda:1"
 
-model = models.resnet18(pretrained=True)
+model = models.vgg19(pretrained=True)
 modules = list(model.children())[:-2]
 model = nn.Sequential(*modules)
 for params in model.parameters():
