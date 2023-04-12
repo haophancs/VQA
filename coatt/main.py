@@ -30,7 +30,7 @@ if __name__ == "__main__":
                         default='./datasets/vivqa/vqa/vivqa_test_annotations.json')
 
     parser.add_argument('--batch_size', type=int, default=16)
-    parser.add_argument('--lr', type=float, default=3e-5)
+    parser.add_argument('--lr', type=float, default=2e-5)
     parser.add_argument('--num_epochs', type=int, default=30)
     parser.add_argument('--num_data_loader_workers', type=int, default=0)
     args = parser.parse_args()
