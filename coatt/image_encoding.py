@@ -54,7 +54,7 @@ ts_image_dir = './datasets/vivqa/test'
 tr_out_dir = './outputs/coatt/tr_enc'
 va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
-DEVICE = "cuda"
+DEVICE = "cuda:1"
 
 model = models.resnet18(pretrained=True)
 modules = list(model.children())[:-2]
@@ -62,7 +62,7 @@ model = nn.Sequential(*modules)
 for params in model.parameters():
     params.requires_grad = False
 
-if DEVICE == 'cuda':
+if DEVICE == 'cuda:1':
     model = model.cuda()
 
 tr_img_dataset = VqaImgDataset(image_dir=tr_image_dir, name='train', img_prefix="")

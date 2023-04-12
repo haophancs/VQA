@@ -61,8 +61,8 @@ class ExperimentRunnerBase(object):
         self._lr = lr
 
         # Use the GPU if it's available.
-        self.DEVICE = "cuda"
-        if self.DEVICE == "cuda":
+        self.DEVICE = "cuda:1"
+        if self.DEVICE == "cuda:1":
             self._model = self._model.cuda()
 
         if self.method == 'simple':
@@ -93,7 +93,7 @@ class ExperimentRunnerBase(object):
             self.img_enc = nn.Sequential(*modules)
             for params in self.img_enc.parameters():
                 params.requires_grad = False
-            if self.DEVICE == "cuda":
+            if self.DEVICE == "cuda:1":
                 self.img_enc = self.img_enc.cuda()
             self.img_enc.eval()
 
