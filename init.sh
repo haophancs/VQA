@@ -14,7 +14,7 @@ mkdir -p ./outputs/coatt/log
 cd ./datasets
 gdown 1Yc36OjdwpXt14eOJ6HjK78prV-eT8Y83
 unzip -q vivqa.zip && rm vivqa.zip
-cd /content/VQA
+cd -
 
 # Download pretrained word vectors
 cd ./pretrained
@@ -30,7 +30,7 @@ rm word2vec_vi_words_300dims.zip
 # unzip -q word2vec_vi_syllables_100dims.zip
 # rm word2vec_vi_syllables_100dims.zip
 
-wget https://public.vinai.io/word2vec_vi_syllables_300dims.zip
-unzip -q word2vec_vi_syllables_300dims.zip
-rm word2vec_vi_syllables_300dims.zip
-cd /content/VQA
+# wget https://public.vinai.io/word2vec_vi_syllables_300dims.zip
+# unzip -q word2vec_vi_syllables_300dims.zip
+# rm word2vec_vi_syllables_300dims.zip
+cd -
