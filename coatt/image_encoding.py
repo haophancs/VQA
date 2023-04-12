@@ -63,7 +63,7 @@ for params in model.parameters():
     params.requires_grad = False
 
 if DEVICE == 'cuda:1':
-    model = model.cuda()
+    model = model.to('cuda:1')
 
 tr_img_dataset = VqaImgDataset(image_dir=tr_image_dir, name='train', img_prefix="")
 tr_img_dataset_loader = DataLoader(tr_img_dataset, batch_size=16, shuffle=False, num_workers=0)
