@@ -228,7 +228,7 @@ class ExperimentRunnerBase(object):
 
             if (epoch + 1) % self._save_freq == 0 or epoch == self._num_epochs - 1:
                 val_accuracy = self.validate()
-                print("Epoch: {} has val accuracy {}".format(epoch, val_accuracy))
+                # print("Epoch: {} has val accuracy {}".format(epoch, val_accuracy))
                 self.writer.add_scalar('valid/accuracy', val_accuracy, val_iter)
                 val_iter = val_iter + 1
 
@@ -240,8 +240,9 @@ class ExperimentRunnerBase(object):
                                       'best_prec': best_prec},
                                      # 'optimizer': optimizer.state_dict()}, is_best,
                                      is_best, self.chk_dir + 'checkpoint_' + str(epoch + 1) + '.pth.tar')
-            if (epoch + 1) % 5 == 0:
-                self.test()
+            self.test()
+            print()
+            print()
 
         # Closing tensorboard logger
         logdir = os.path.join('./outputs/coatt/log/tb_', datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
