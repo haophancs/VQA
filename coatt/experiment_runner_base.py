@@ -61,9 +61,9 @@ class ExperimentRunnerBase(object):
         self._lr = lr
 
         # Use the GPU if it's available.
-        self.DEVICE = "cuda:0"
-        if self.DEVICE == "cuda:0":
-            self._model = self._model.to('cuda:0')
+        self.DEVICE = "cuda:1"
+        if self.DEVICE == "cuda:1":
+            self._model = self._model.to('cuda:1')
 
         if self.method == 'simple':
             # self.optimizer = optim.Adam(self._model.parameters(), lr=self._lr)
@@ -93,8 +93,8 @@ class ExperimentRunnerBase(object):
             self.img_enc = nn.Sequential(*modules)
             for params in self.img_enc.parameters():
                 params.requires_grad = False
-            if self.DEVICE == "cuda:0":
-                self.img_enc = self.img_enc.to('cuda:0')
+            if self.DEVICE == "cuda:1":
+                self.img_enc = self.img_enc.to('cuda:1')
             self.img_enc.eval()
 
         if not os.path.exists(self.chk_dir):
