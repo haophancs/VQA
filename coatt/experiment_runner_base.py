@@ -211,7 +211,7 @@ class ExperimentRunnerBase(object):
                 loss = self._optimize(predicted_answer, ground_truth_answer)
 
                 if (current_step + 1) % self._log_freq == 0:
-                    print("Epoch: {}, Batch {}/{} has loss {}".format(epoch, batch_id, num_batches, loss))
+                    # print("Epoch: {}, Batch {}/{} has loss {}".format(epoch, batch_id, num_batches, loss))
 
                     # TODO: you probably want to plot something here
                     self.writer.add_scalar('train/loss', loss.item(), tr_iter)
@@ -226,20 +226,21 @@ class ExperimentRunnerBase(object):
             #                    self.writer.add_scalar('valid/accuracy', val_accuracy, val_iter)
             #                    val_iter = val_iter + 1
 
-            if (epoch + 1) % self._save_freq == 0 or epoch == self._num_epochs - 1:
-                val_accuracy = self.validate()
-                # print("Epoch: {} has val accuracy {}".format(epoch, val_accuracy))
-                self.writer.add_scalar('valid/accuracy', val_accuracy, val_iter)
-                val_iter = val_iter + 1
+            val_accuracy = self.validate()
+            print("Epoch: {} has val accuracy {}".format(epoch, val_accuracy))
+            self.writer.add_scalar('valid/accuracy', val_accuracy, val_iter)
+            val_iter = val_iter + 1
 
-                # remember best val_accuracy and save checkpoint
-                is_best = val_accuracy > best_prec
-                best_prec = max(val_accuracy, best_prec)
-                self.save_checkpoint({'epoch': epoch + 1,
-                                      'state_dict': self._model.state_dict(),
-                                      'best_prec': best_prec},
-                                     # 'optimizer': optimizer.state_dict()}, is_best,
-                                     is_best, self.chk_dir + 'checkpoint_' + str(epoch + 1) + '.pth.tar')
+            # remember best val_accuracy and save checkpoint
+            is_best = val_accuracy > best_prec
+            if is_best:
+                print("THIS IS BESTTTTTTTTTT")
+            best_prec = max(val_accuracy, best_prec)
+            self.save_checkpoint({'epoch': epoch + 1,
+                                  'state_dict': self._model.state_dict(),
+                                  'best_prec': best_prec},
+                                 # 'optimizer': optimizer.state_dict()}, is_best,
+                                 is_best, self.chk_dir + 'checkpoint_' + str(epoch + 1) + '.pth.tar')
             self.test()
             print()
             print()
