@@ -26,7 +26,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
     def __init__(self, train_image_dir, train_question_path, train_annotation_path,
                  val_image_dir, val_question_path, val_annotation_path,
                  test_image_dir, test_question_path, test_annotation_path, batch_size, num_epochs,
-                 num_data_loader_workers, pretrained_embed='word2vec_vi_words_100dims'):
+                 num_data_loader_workers, pretrained_embed='word2vec_vi_words_100dims', lr=0.001):
         self.method = 'coattention'
         print('Loading numpy files. \n')
         with open('./outputs/coatt/q2i.pkl', 'rb') as f:
@@ -90,7 +90,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
         print('Creating Co Attention Model.')
         model = CoattentionNet(len(q2i), 1000, pretrained_embed=pretrained_embed).float()
 
-        super().__init__(train_dataset, val_dataset, model, batch_size, num_epochs, num_data_loader_workers)
+        super().__init__(train_dataset, val_dataset, model, batch_size, num_epochs, num_data_loader_workers, lr)
 
     def _optimize(self, predicted_answers, true_answer_ids):
         self.optimizer.zero_grad()
