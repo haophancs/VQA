@@ -27,7 +27,7 @@ class CoattentionNet(nn.Module):
         self.bigram_conv  = nn.Conv1d(embed_dim, embed_dim, 2, stride=1, padding=1, dilation=2)
         self.trigram_conv = nn.Conv1d(embed_dim, embed_dim, 3, stride=1, padding=2, dilation=2)
         self.max_pool = nn.MaxPool2d((3, 1))
-        self.lstm = nn.LSTM(input_size=embed_dim, hidden_size=embed_dim, num_layers=3, dropout=0.15)
+        self.lstm = nn.LSTM(input_size=embed_dim, hidden_size=embed_dim, num_layers=3, dropout=0.4)
         self.tanh = nn.Tanh()
 
         self.W_b = nn.Parameter(torch.randn(embed_dim, embed_dim))

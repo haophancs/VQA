@@ -30,7 +30,7 @@ if __name__ == "__main__":
                         default='./datasets/vivqa/vqa/vivqa_test_annotations.json')
 
     parser.add_argument('--batch_size', type=int, default=16)
-    parser.add_argument('--lr', type=float, default=2e-5)
+    parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--num_epochs', type=int, default=30)
     parser.add_argument('--num_data_loader_workers', type=int, default=0)
     args = parser.parse_args()
@@ -58,6 +58,7 @@ if __name__ == "__main__":
                                                 batch_size=args.batch_size,
                                                 num_epochs=args.num_epochs,
                                                 num_data_loader_workers=args.num_data_loader_workers,
-                                                pretrained_embed=args.pretrained_embed)
+                                                pretrained_embed=args.pretrained_embed,
+                                                lr=args.lr)
     experiment_runner.train()
     experiment_runner.test()

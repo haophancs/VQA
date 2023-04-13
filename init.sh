@@ -18,9 +18,11 @@ cd -
 
 # Download pretrained word vectors
 cd ./pretrained
-# wget https://public.vinai.io/word2vec_vi_words_100dims.zip
-# unzip -q word2vec_vi_words_100dims.zip
-# rm word2vec_vi_words_100dims.zip
+wget https://public.vinai.io/word2vec_vi_words_100dims.zip
+unzip -q word2vec_vi_words_100dims.zip
+rm word2vec_vi_words_100dims.zip
+cd -
+python -m coatt.image_encoding && python -m coatt.main --model coattention --pretrained_embed phow2v.word.100d
 
 wget https://public.vinai.io/word2vec_vi_words_300dims.zip
 unzip -q word2vec_vi_words_300dims.zip
