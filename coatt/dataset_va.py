@@ -41,6 +41,7 @@ for ques_id in ques_ids:
     if not answer == "":
         ques_ids_modif.append(ques_id)
 
+print(len(ques_ids_modif), len(ques_ids))
 np.save('./outputs/coatt/va_img_names.npy', img_names)
 np.save('./outputs/coatt/va_img_ids.npy', img_ids)
 np.save('./outputs/coatt/va_ques_ids.npy', ques_ids_modif)
