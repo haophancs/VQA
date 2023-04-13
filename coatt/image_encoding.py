@@ -66,13 +66,13 @@ if DEVICE == 'cuda:0':
     model = model.to('cuda:0')
 
 tr_img_dataset = VqaImgDataset(image_dir=tr_image_dir, name='train', img_prefix="")
-tr_img_dataset_loader = DataLoader(tr_img_dataset, batch_size=16, shuffle=False, num_workers=0)
+tr_img_dataset_loader = DataLoader(tr_img_dataset, batch_size=64, shuffle=False, num_workers=0)
 
 va_img_dataset = VqaImgDataset(image_dir=va_image_dir, name='val', img_prefix="")
-va_img_dataset_loader = DataLoader(va_img_dataset, batch_size=16, shuffle=False, num_workers=0)
+va_img_dataset_loader = DataLoader(va_img_dataset, batch_size=64, shuffle=False, num_workers=0)
 
 ts_img_dataset = VqaImgDataset(image_dir=ts_image_dir, name='test', img_prefix="")
-ts_img_dataset_loader = DataLoader(ts_img_dataset, batch_size=16, shuffle=False, num_workers=0)
+ts_img_dataset_loader = DataLoader(ts_img_dataset, batch_size=64, shuffle=False, num_workers=0)
 
 print('Dumping Training images encodings.')
 for idx, imgT in enumerate(tr_img_dataset_loader):
