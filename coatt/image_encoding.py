@@ -28,7 +28,7 @@ class VqaImgDataset(Dataset):
     def __init__(self, image_dir, name, img_prefix):
         self.image_dir = image_dir
         self.img_names = [f for f in os.listdir(self.image_dir) if '.jpg' in f]
-        self.transform = transforms.Compose([transforms.Resize((224, 224)),
+        self.transform = transforms.Compose([transforms.Resize((448, 448)),
                                              transforms.ToTensor()])
 
         img_ids = {}

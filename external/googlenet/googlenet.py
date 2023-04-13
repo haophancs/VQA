@@ -50,8 +50,8 @@ class GoogLeNet(nn.Module):
         self.inception3b = Inception(256, 128, 128, 192, 32, 96, 16)
         self.maxpool3 = nn.MaxPool2d(3, stride=2, ceil_mode=True)
 
-        self.inception4a = Inception(224, 192, 96, 208, 16, 48, 16)
-        self.inception4b = Inception(512, 160, 112, 224, 24, 16, 16)
+        self.inception4a = Inception(448, 192, 96, 208, 16, 48, 16)
+        self.inception4b = Inception(512, 160, 112, 448, 24, 16, 16)
         self.inception4c = Inception(512, 128, 128, 256, 24, 16, 16)
         self.inception4d = Inception(512, 112, 144, 288, 32, 16, 16)
         self.inception4e = Inception(528, 256, 160, 320, 32, 128, 128)
@@ -87,11 +87,11 @@ class GoogLeNet(nn.Module):
     def forward(self, x):
         if self.transform_input:
             x_ch0 = torch.unsqueeze(x[:, 0], 1) * (0.229 / 0.5) + (0.485 - 0.5) / 0.5
-            x_ch1 = torch.unsqueeze(x[:, 1], 1) * (0.224 / 0.5) + (0.456 - 0.5) / 0.5
+            x_ch1 = torch.unsqueeze(x[:, 1], 1) * (0.448 / 0.5) + (0.456 - 0.5) / 0.5
             x_ch2 = torch.unsqueeze(x[:, 2], 1) * (0.225 / 0.5) + (0.406 - 0.5) / 0.5
             x = torch.cat((x_ch0, x_ch1, x_ch2), 1)
 
-        # N x 3 x 224 x 224
+        # N x 3 x 448 x 448
         x = self.conv1(x)
         # N x 16 x 112 x 112
         x = self.maxpool1(x)
@@ -106,9 +106,9 @@ class GoogLeNet(nn.Module):
         x = self.inception3a(x)
         # N x 256 x 28 x 28
         x = self.inception3b(x)
-        # N x 224 x 28 x 28
+        # N x 448 x 28 x 28
         x = self.maxpool3(x)
-        # N x 224 x 14 x 14
+        # N x 448 x 14 x 14
         x = self.inception4a(x)
         # N x 512 x 14 x 14
         if self.training and self.aux_logits and not self.remove_fc:
