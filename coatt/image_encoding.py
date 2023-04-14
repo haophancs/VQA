@@ -54,7 +54,7 @@ ts_image_dir = './datasets/vivqa/test'
 tr_out_dir = './outputs/coatt/tr_enc'
 va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
-DEVICE = "cuda:0"
+DEVICE = 'cuda:0'
 
 model = models.resnext50_32x4d(pretrained=True)
 modules = list(model.children())[:-2]
@@ -79,7 +79,7 @@ for idx, imgT in enumerate(tr_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cuda:0().numpy()
+    out = out.cpu().numpy()
 
     path = tr_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
@@ -91,7 +91,7 @@ for idx, imgT in enumerate(va_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cuda:0().numpy()
+    out = out.cpu().numpy()
 
     path = va_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
@@ -103,7 +103,7 @@ for idx, imgT in enumerate(ts_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cuda:0().numpy()
+    out = out.cpu().numpy()
 
     path = ts_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
