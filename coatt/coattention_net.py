@@ -20,7 +20,7 @@ class CoattentionNet(nn.Module):
             embed_dim=embed_dim,
             pretrained_name=pretrained_embed,
             pretrained_root='./pretrained',
-            device='cpu'
+            device='cuda:0'
         )
 
         self.unigram_conv = nn.Conv1d(embed_dim, embed_dim, 1, stride=1, padding=0)

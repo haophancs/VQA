@@ -54,7 +54,7 @@ ts_image_dir = './datasets/vivqa/test'
 tr_out_dir = './outputs/coatt/tr_enc'
 va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
-DEVICE = "cpu"
+DEVICE = "cuda:0"
 
 model = models.resnext50_32x4d(pretrained=True)
 modules = list(model.children())[:-2]
@@ -62,8 +62,8 @@ model = nn.Sequential(*modules)
 for params in model.parameters():
     params.requires_grad = False
 
-if DEVICE == 'cpu':
-    model = model.to('cpu')
+if DEVICE == 'cuda:0':
+    model = model.to('cuda:0')
 
 tr_img_dataset = VqaImgDataset(image_dir=tr_image_dir, name='train', img_prefix="")
 tr_img_dataset_loader = DataLoader(tr_img_dataset, batch_size=16, shuffle=False, num_workers=0)
@@ -79,7 +79,7 @@ for idx, imgT in enumerate(tr_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cpu().numpy()
+    out = out.cuda:0().numpy()
 
     path = tr_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
@@ -91,7 +91,7 @@ for idx, imgT in enumerate(va_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cpu().numpy()
+    out = out.cuda:0().numpy()
 
     path = va_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)
@@ -103,7 +103,7 @@ for idx, imgT in enumerate(ts_img_dataset_loader):
     imgT = imgT.to(DEVICE)
     out = model(imgT)
     out = out.view(out.size(0), out.size(1), -1)
-    out = out.cpu().numpy()
+    out = out.cuda:0().numpy()
 
     path = ts_out_dir + '/' + str(idx) + '.npz'
     #np.savez(path, out=out)

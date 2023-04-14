@@ -9,13 +9,13 @@ from transformers import AutoModel
 
 
 class PretrainedTextEmbedding:
-    def __init__(self, embed_dim=None, device='cpu', **kwargs):
+    def __init__(self, embed_dim=None, device='cuda:0', **kwargs):
         self.embed_dim = embed_dim
         self.embed_layer = None
         self.device = torch.device(device)
 
     @staticmethod
-    def from_pretrained(pretrained_name, embed_dim=None, pretrained_root=None, device='cpu'):
+    def from_pretrained(pretrained_name, embed_dim=None, pretrained_root=None, device='cuda:0'):
         print(f'Load pretrained {pretrained_name} for text embedding')
         if not pretrained_root:
             pretrained_root = ''
@@ -62,7 +62,7 @@ class PretrainedW2VEmbedding(PretrainedTextEmbedding):
     }
     PRETRAINED_LIST = list(_NAME_TO_FILE.keys())
 
-    def __init__(self, pretrained_name, pretrained_root, embed_dim=None, device='cpu', **kwargs):
+    def __init__(self, pretrained_name, pretrained_root, embed_dim=None, device='cuda:0', **kwargs):
         super().__init__(embed_dim=embed_dim, device=device, **kwargs)
         self.embed_layer = nn.Embedding.from_pretrained(
             torch.FloatTensor(gensim.models.KeyedVectors.load_word2vec_format(os.path.join(
@@ -85,7 +85,7 @@ class PretrainedSeq2SeqEmbedding(PretrainedTextEmbedding):
             pretrained_name,
             pretrained_root='huggingface',
             embed_dim=None,
-            device='cpu',
+            device='cuda:0',
             **kwargs
     ):
         super().__init__(embed_dim=embed_dim, device=device, **kwargs)

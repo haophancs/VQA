@@ -61,9 +61,9 @@ class ExperimentRunnerBase(object):
         self._lr = lr
 
         # Use the GPU if it's available.
-        self.DEVICE = "cpu"
-        if self.DEVICE == "cpu":
-            self._model = self._model.to('cpu')
+        self.DEVICE = "cuda:0"
+        if self.DEVICE == "cuda:0":
+            self._model = self._model.to('cuda:0')
 
         if self.method == 'simple':
             # self.optimizer = optim.Adam(self._model.parameters(), lr=self._lr)
@@ -93,8 +93,8 @@ class ExperimentRunnerBase(object):
             self.img_enc = nn.Sequential(*modules)
             for params in self.img_enc.parameters():
                 params.requires_grad = False
-            if self.DEVICE == "cpu":
-                self.img_enc = self.img_enc.to('cpu')
+            if self.DEVICE == "cuda:0":
+                self.img_enc = self.img_enc.to('cuda:0')
             self.img_enc.eval()
 
         if not os.path.exists(self.chk_dir):
@@ -124,7 +124,7 @@ class ExperimentRunnerBase(object):
             pd_ans = self._model(imgT, quesT)  # TODO
 
             batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
-            batch_ga = gT.detach().cpu().numpy().tolist()
+            batch_ga = gT.detach().cuda:0().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
 
@@ -151,7 +151,7 @@ class ExperimentRunnerBase(object):
             pd_ans = self._model(imgT, quesT)  # TODO
 
             batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
-            batch_ga = gT.detach().cpu().numpy().tolist()
+            batch_ga = gT.detach().cuda:0().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
 
