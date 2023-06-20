@@ -16,7 +16,7 @@ with open('./outputs/coatt/a2i.pkl', 'rb') as f:
 
 vqa = VQA(ajson, qjson)
 
-img_names = [f for f in os.listdir(image_dir) if '.jpg' in f]
+img_names = [f for f in os.listdir(image_dir) if '.png' in f]
 img_ids = []
 for fname in img_names:
     img_id = fname.split('.')[0].split('_')[-1]

@@ -9,7 +9,7 @@ def pre_process_dataset(image_dir, qjson, ajson, img_prefix):
     print('Preprocessing datatset. \n')
     vqa = VQA(ajson, qjson)
 
-    img_names = [f for f in os.listdir(image_dir) if '.jpg' in f]
+    img_names = [f for f in os.listdir(image_dir) if '.png' in f]
     img_ids = []
     for fname in img_names:
         img_id = fname.split('.')[0].split('_')[-1]

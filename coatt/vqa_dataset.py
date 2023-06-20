@@ -42,7 +42,7 @@ class VqaDataset(Dataset):
             question_json_file_path (string): Path to the json file containing the question data
             annotation_json_file_path (string): Path to the json file containing the annotations mapping images, questions, and
                 answers together
-            image_filename_pattern (string): The pattern the filenames of images in this dataset use (eg "COCO_train2014_{}.jpg")
+            image_filename_pattern (string): The pattern the filenames of images in this dataset use (eg "COCO_train2014_{}.png")
         """
         print(method)
         self.image_dir = image_dir
@@ -69,7 +69,7 @@ class VqaDataset(Dataset):
 
 
         if not collate:
-            self.img_names = [f for f in os.listdir(self.image_dir) if '.jpg' in f]
+            self.img_names = [f for f in os.listdir(self.image_dir) if '.png' in f]
             self.img_ids = []
             for fname in self.img_names:
                 img_id = fname.split('.')[0].split('_')[-1]
