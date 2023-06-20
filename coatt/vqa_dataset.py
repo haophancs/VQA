@@ -72,7 +72,7 @@ class VqaDataset(Dataset):
             self.img_names = [f for f in os.listdir(self.image_dir) if '.jpg' in f]
             self.img_ids = []
             for fname in self.img_names:
-                img_id = fname.split('.')[0]
+                img_id = fname.split('.')[0].split('_')[-1]
                 self.img_ids.append(int(img_id))
 
             self.ques_ids = self.vqa.getQuesIds(self.img_ids)

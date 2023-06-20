@@ -6,17 +6,17 @@ from six.moves import cPickle as pickle
 from collections import defaultdict
 from external.vqa.vqa import VQA
 
-image_dir = "./datasets/vivqa/train"
+image_dir = "./datasets/viclevr/train"
 img_prefix = ""
-qjson = "./datasets/vivqa/vqa/vivqa_train_questions.json"
-ajson = "./datasets/vivqa/vqa/vivqa_train_annotations.json"
+qjson = "./datasets/viclevr/vqa/viclevr_train_questions.json"
+ajson = "./datasets/viclevr/vqa/viclevr_train_annotations.json"
 
 vqa = VQA(ajson, qjson)
 
 img_names = [f for f in os.listdir(image_dir) if '.jpg' in f]
 img_ids = []
 for fname in img_names:
-    img_id = fname.split('.')[0]
+    img_id = fname.split('.')[0].split('_')[-1]
     img_ids.append(int(img_id))
 
 ques_ids = vqa.getQuesIds(img_ids)

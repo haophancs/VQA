@@ -33,7 +33,7 @@ class VqaImgDataset(Dataset):
 
         img_ids = {}
         for idx, fname in enumerate(self.img_names):
-            img_id = fname.split('.')[0]
+            img_id = fname.split('.')[0].split('_')[-1]
             img_ids[int(img_id)] = idx
 
         with open('./outputs/coatt/' + name + '_enc_idx.npy', 'wb') as f:
@@ -48,9 +48,9 @@ class VqaImgDataset(Dataset):
 
         return imgT.float()
 
-tr_image_dir = './datasets/vivqa/train'
-va_image_dir = './datasets/vivqa/val'
-ts_image_dir = './datasets/vivqa/test'
+tr_image_dir = './datasets/viclevr/train'
+va_image_dir = './datasets/viclevr/val'
+ts_image_dir = './datasets/viclevr/test'
 tr_out_dir = './outputs/coatt/tr_enc'
 va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
