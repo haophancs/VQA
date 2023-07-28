@@ -11,23 +11,23 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str, choices=['simple', 'coattention'], default='simple')
     parser.add_argument('--pretrained_embed', type=str, default='word2vec_vi_words_100dims')
 
-    parser.add_argument('--train_image_dir', type=str, default='./datasets/viclevr/train')
+    parser.add_argument('--train_image_dir', type=str, default='./viclevr_datasets/viclevr/train')
     parser.add_argument('--train_question_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_train_questions.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_train_questions.json')
     parser.add_argument('--train_annotation_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_train_annotations.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_train_annotations.json')
 
-    parser.add_argument('--val_image_dir', type=str, default='./datasets/viclevr/val')
+    parser.add_argument('--val_image_dir', type=str, default='./viclevr_datasets/viclevr/val')
     parser.add_argument('--val_question_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_val_questions.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_val_questions.json')
     parser.add_argument('--val_annotation_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_val_annotations.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_val_annotations.json')
 
-    parser.add_argument('--test_image_dir', type=str, default='./datasets/viclevr/test')
+    parser.add_argument('--test_image_dir', type=str, default='./viclevr_datasets/viclevr/test')
     parser.add_argument('--test_question_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_test_questions.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_test_questions.json')
     parser.add_argument('--test_annotation_path', type=str,
-                        default='./datasets/viclevr/vqa/viclevr_test_annotations.json')
+                        default='./viclevr_datasets/viclevr/vqa/viclevr_test_annotations.json')
 
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--lr', type=float, default=0.001)

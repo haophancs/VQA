@@ -163,6 +163,9 @@ class ExperimentRunnerBase(object):
         print("Test macro f1:", f1_score(all_ga, all_pa, average='macro', zero_division=0))
         print("Test weighted f1:", f1_score(all_ga, all_pa, average='weighted', zero_division=0))
 
+        with open('./outputs/coatt/ground_and_pred_answers.json', 'w') as f:
+            json.dump({'ground_answers': all_ga, 'pred_answers': all_pa}, f, indent=4)
+
         with open('./outputs/coatt/i2a.pkl', 'rb') as f:
             i2a = pickle.load(f)
         all_ga = list(map(lambda a: i2a[a], all_ga))
