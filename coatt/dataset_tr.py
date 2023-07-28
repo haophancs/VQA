@@ -6,10 +6,10 @@ from six.moves import cPickle as pickle
 from collections import defaultdict
 from external.vqa.vqa import VQA
 
-image_dir = "./datasets/viclevr/train"
+image_dir = "./viclevr_datasets/viclevr/train"
 img_prefix = ""
-qjson = "./datasets/viclevr/vqa/viclevr_train_questions.json"
-ajson = "./datasets/viclevr/vqa/viclevr_train_annotations.json"
+qjson = "./viclevr_datasets/viclevr/vqa/viclevr_train_questions.json"
+ajson = "./viclevr_datasets/viclevr/vqa/viclevr_train_annotations.json"
 
 vqa = VQA(ajson, qjson)
 
