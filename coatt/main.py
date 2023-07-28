@@ -9,7 +9,7 @@ if __name__ == "__main__":
     # Feel free to add more args, or change/remove these.
     parser = argparse.ArgumentParser(description='Load VQA.')
     parser.add_argument('--model', type=str, choices=['simple', 'coattention'], default='simple')
-    parser.add_argument('--pretrained_embed', type=str, default='word2vec_vi_words_100dims')
+    parser.add_argument('--pretrained_embed', type=str, default='word2vec_vi_words_300dims')
 
     parser.add_argument('--train_image_dir', type=str, default='./viclevr_datasets/viclevr/train')
     parser.add_argument('--train_question_path', type=str,
