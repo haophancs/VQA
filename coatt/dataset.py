@@ -5,6 +5,7 @@ import numpy as np
 from collections import defaultdict
 from external.vqa.vqa import VQA
 
+
 def pre_process_dataset(image_dir, qjson, ajson, img_prefix):
     print('Preprocessing datatset. \n')
     vqa = VQA(ajson, qjson)
@@ -53,6 +54,7 @@ def pre_process_dataset(image_dir, qjson, ajson, img_prefix):
 
     return q2i, a2i, i2a, a2i_count
 
+
 if __name__ == '__main__':
     image_dir = "./viclevr_datasets/viclevr/train"
     img_prefix = ""
@@ -64,5 +66,3 @@ if __name__ == '__main__':
     np.save('./outputs/coatt/a2i.npy', a2i)
     np.save('./outputs/coatt/i2a.npy', i2a)
     np.save('./outputs/coatt/a2i_count.npy', a2i_count)
-
-
