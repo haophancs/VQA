@@ -61,8 +61,7 @@ if __name__ == '__main__':
     qjson = "./viclevr_datasets/viclevr/vqa/viclevr_train_questions.json"
     ajson = "./viclevr_datasets/viclevr/vqa/viclevr_train_annotations.json"
 
-    q2i, a2i, i2a, a2i_count = pre_process_dataset(image_dir, qjson, ajson, img_prefix)
-    print(q2i)
+    _, q2i, a2i, i2a, a2i_count = pre_process_dataset(image_dir, qjson, ajson, img_prefix)
     np.save('./outputs/coatt/q2i.npy', q2i)
     np.save('./outputs/coatt/a2i.npy', a2i)
     np.save('./outputs/coatt/i2a.npy', i2a)
