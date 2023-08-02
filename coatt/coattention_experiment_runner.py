@@ -78,7 +78,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                                   ques_ids=ts_ques_ids, method=self.method,
                                   dataset_type="test", enc_dir='./outputs/coatt/ts_enc')
 
-        self._train_dataset_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0,
+        self._train_dataset_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=0,
                                                 collate_fn=collate_lines)
 
         self._val_dataset_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0,
