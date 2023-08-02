@@ -61,10 +61,10 @@ class VqaDataset(Dataset):
         self.vqa = VQA(self.ajson, self.qjson)
 
         if self.method == 'simple':
-            self.transform = transforms.Compose([transforms.Resize((448, 448)),
+            self.transform = transforms.Compose([transforms.Resize((224, 224)),
                                                  transforms.ToTensor()])
         else:
-            self.transform = transforms.Compose([transforms.Resize((448, 448)),
+            self.transform = transforms.Compose([transforms.Resize((224, 224)),
                                                  transforms.ToTensor()])
 
 

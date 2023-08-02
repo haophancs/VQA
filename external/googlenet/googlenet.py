@@ -91,7 +91,7 @@ class GoogLeNet(nn.Module):
             x_ch2 = torch.unsqueeze(x[:, 2], 1) * (0.225 / 0.5) + (0.406 - 0.5) / 0.5
             x = torch.cat((x_ch0, x_ch1, x_ch2), 1)
 
-        # N x 3 x 448 x 448
+        # N x 3 x 224 x 224
         x = self.conv1(x)
         # N x 16 x 112 x 112
         x = self.maxpool1(x)
@@ -106,9 +106,9 @@ class GoogLeNet(nn.Module):
         x = self.inception3a(x)
         # N x 256 x 28 x 28
         x = self.inception3b(x)
-        # N x 448 x 28 x 28
+        # N x 224 x 28 x 28
         x = self.maxpool3(x)
-        # N x 448 x 14 x 14
+        # N x 224 x 14 x 14
         x = self.inception4a(x)
         # N x 512 x 14 x 14
         if self.training and self.aux_logits and not self.remove_fc:
