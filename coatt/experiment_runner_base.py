@@ -135,7 +135,9 @@ class ExperimentRunnerBase(object):
         # TODO. Should return your validation accuracy
         all_pa = []
         all_ga = []
+        all_tokenized_questions = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
+            all_tokenized_questions.extend(list(map(lambda tensor: tensor.detach().cpu().numpy().tolist(), quesT)))
             self._model.eval()  # Set the model to train mode
             if not self.method == 'simple':
                 quesT = rnn.pack_sequence(quesT)
@@ -167,6 +169,7 @@ class ExperimentRunnerBase(object):
 
         with open('ground_and_pred_answers.json', 'w') as f:
             json.dump({
+                'tokenized_question': all_tokenized_questions,
                 'ground_answers': all_ga,
                 'pred_answers': all_pa
             }, f, indent=4)
