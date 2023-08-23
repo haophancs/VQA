@@ -135,7 +135,6 @@ class ExperimentRunnerBase(object):
         # TODO. Should return your validation accuracy
         all_pa = []
         all_ga = []
-        all_qid = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
             self._model.eval()  # Set the model to train mode
             if not self.method == 'simple':
@@ -150,10 +149,8 @@ class ExperimentRunnerBase(object):
 
             batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
             batch_ga = gT.detach().cpu().numpy().tolist()
-            batch_qid = quesT.detach().cpu().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
-            all_qid += batch_qid
 
         print("Test accuracy:", accuracy_score(all_ga, all_pa))
         print("Test macro precision:", precision_score(all_ga, all_pa, average='macro', zero_division=0))
@@ -170,7 +167,6 @@ class ExperimentRunnerBase(object):
 
         with open('ground_and_pred_answers.json', 'w') as f:
             json.dump({
-                'question_ids': all_qid,
                 'ground_answers': all_ga,
                 'pred_answers': all_pa
             }, f, indent=4)
