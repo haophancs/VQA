@@ -137,9 +137,6 @@ class ExperimentRunnerBase(object):
         all_ga = []
         all_qid = []
         for batch_id, (imgT, quesT, gT) in enumerate(self._test_dataset_loader):
-            print(quesT)
-            all_qid += quesT.detach().cpu().numpy().tolist()
-
             self._model.eval()  # Set the model to train mode
             if not self.method == 'simple':
                 quesT = rnn.pack_sequence(quesT)
@@ -153,8 +150,10 @@ class ExperimentRunnerBase(object):
 
             batch_pa = [torch.argmax(pd_ans[i]).item() for i in range(gT.shape[0])]
             batch_ga = gT.detach().cpu().numpy().tolist()
+            batch_qid = quesT.detach().cpu().numpy().tolist()
             all_pa += batch_pa
             all_ga += batch_ga
+            all_qid += batch_qid
 
         print("Test accuracy:", accuracy_score(all_ga, all_pa))
         print("Test macro precision:", precision_score(all_ga, all_pa, average='macro', zero_division=0))
