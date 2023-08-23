@@ -169,7 +169,11 @@ class ExperimentRunnerBase(object):
         all_pa = list(map(lambda a: i2a[a], all_pa))
 
         with open('ground_and_pred_answers.json', 'w') as f:
-            json.dump({'ground_answers': all_ga, 'pred_answers': all_pa}, f, indent=4)
+            json.dump({
+                'question_ids': all_qid
+                'ground_answers': all_ga,
+                'pred_answers': all_pa
+            }, f, indent=4)
 
         pd.DataFrame.from_dict({
             'ga': all_ga, 'pa': all_pa
