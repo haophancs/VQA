@@ -170,7 +170,7 @@ class ExperimentRunnerBase(object):
 
         with open('ground_and_pred_answers.json', 'w') as f:
             json.dump({
-                'question_ids': all_qid
+                'question_ids': all_qid,
                 'ground_answers': all_ga,
                 'pred_answers': all_pa
             }, f, indent=4)
