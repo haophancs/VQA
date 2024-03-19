@@ -48,9 +48,9 @@ class VqaImgDataset(Dataset):
 
         return imgT.float()
 
-tr_image_dir = './viclevr_datasets/viclevr/train'
-va_image_dir = './viclevr_datasets/viclevr/val'
-ts_image_dir = './viclevr_datasets/viclevr/test'
+tr_image_dir = './datasets/vigqa/train'
+va_image_dir = './datasets/vigqa/val'
+ts_image_dir = './datasets/vigqa/test'
 tr_out_dir = './outputs/coatt/tr_enc'
 va_out_dir = './outputs/coatt/va_enc'
 ts_out_dir = './outputs/coatt/ts_enc'
