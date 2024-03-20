@@ -178,11 +178,6 @@ class ExperimentRunnerBase(object):
             'ga': all_ga, 'pa': all_pa
         }).to_csv('./outputs/coatt/ga_pa.csv', index=False)
 
-        trans_dict = create_trans_dict(np.union1d(all_ga, all_pa), translator=translator)
-        wups = [wu_palmer_similarity(trans_dict[ga], trans_dict[pa]) for ga, pa in list(zip(all_ga, all_pa))]
-        print("Test wups 0.0:", np.mean([it > 0.0 for it in wups]))
-        print("Test wups 0.9:", np.mean([it > 0.9 for it in wups]))
-
     def train(self):
         print('Started Training.\n')
         tr_iter = 0
