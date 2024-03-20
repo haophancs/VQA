@@ -37,4 +37,8 @@ rm word2vec_vi_words_300dims.zip
 
 cd -
 
-# python -m coatt.image_encoding && python -m coatt.main --model coattention --pretrained_embed phow2v.word.300d
+python -m coatt.dataset
+python -m coatt.dataset_tr
+python -m coatt.dataset_va
+python -m coatt.dataset_ts
+python -m coatt.image_encoding && python -m coatt.main --model coattention --pretrained_embed phow2v.word.300d

@@ -88,7 +88,7 @@ class CoattentionNetExperimentRunner(ExperimentRunnerBase):
                                                collate_fn=collate_lines)
 
         print('Creating Co Attention Model.')
-        model = CoattentionNet(len(q2i), 1000, pretrained_embed=pretrained_embed).float()
+        model = CoattentionNet(len(q2i), len(a2i), pretrained_embed=pretrained_embed).float()
 
         super().__init__(train_dataset, val_dataset, model, batch_size, num_epochs, num_data_loader_workers, lr)
 
